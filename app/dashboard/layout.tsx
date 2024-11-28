@@ -2,7 +2,7 @@
  * @Author: sutengfei
  * @Date: 2024-11-24 19:44:02
  * @LastEditors: sutengfei
- * @LastEditTime: 2024-11-24 19:46:03
+ * @LastEditTime: 2024-11-28 17:31:02
  */
 import SideNav from "../ui/dashboard/sidenav";
 export default function Layout({ children }: { children: React.ReactNode }) {
