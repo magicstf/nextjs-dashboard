@@ -2,13 +2,15 @@
  * @Author: sutengfei
  * @Date: 2024-11-28 19:57:07
  * @LastEditors: sutengfei
- * @LastEditTime: 2024-11-29 15:54:08
+ * @LastEditTime: 2024-11-29 16:40:31
  */
 "use server";
 import { z } from "zod";
 import { sql } from "@vercel/postgres";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
+import { signIn } from "@/auth";
+import { AuthError } from "next-auth";
 
 const FormSchema = z.object({
   id: z.string(),
@@ -112,5 +114,24 @@ export async function deleteInvoice(id: string) {
     return { message: "Deleted Invoice." };
   } catch (error) {
     return { message: `Database Error: ${error}.` };
+  }
+}
+
+export async function authenticate(
+  prevState: string | undefined,
+  formData: FormData
+) {
+  try {
+    await signIn("credentials", formData);
+  } catch (error) {
+    if (error instanceof AuthError) {
+      switch (error.type) {
+        case "CredentialsSignin":
+          return "Invalid credentials.";
+        default:
+          return "Something went wrong.";
+      }
+    }
+    throw error;
   }
 }
