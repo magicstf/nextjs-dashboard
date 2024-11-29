@@ -1,11 +1,17 @@
-import { lusitana } from '@/app/ui/fonts';
+/*
+ * @Author: sutengfei
+ * @Date: 2024-11-19 18:50:25
+ * @LastEditors: sutengfei
+ * @LastEditTime: 2024-11-29 14:48:51
+ */
+import { lusitana } from "@/app/ui/fonts";
 import {
   AtSymbolIcon,
   KeyIcon,
-  ExclamationCircleIcon,
-} from '@heroicons/react/24/outline';
-import { ArrowRightIcon } from '@heroicons/react/20/solid';
-import { Button } from './button';
+  // ExclamationCircleIcon,
+} from "@heroicons/react/24/outline";
+import { ArrowRightIcon } from "@heroicons/react/20/solid";
+import { Button } from "./button";
 
 export default function LoginForm() {
   return (

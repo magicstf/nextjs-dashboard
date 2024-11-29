@@ -2,12 +2,11 @@
  * @Author: sutengfei
  * @Date: 2024-11-19 18:50:25
  * @LastEditors: sutengfei
- * @LastEditTime: 2024-11-26 09:52:49
+ * @LastEditTime: 2024-11-29 14:49:17
  */
 import { generateYAxis } from "@/app/lib/utils";
 import { CalendarIcon } from "@heroicons/react/24/outline";
 import { lusitana } from "@/app/ui/fonts";
-import { Revenue } from "@/app/lib/definitions";
 import { fetchRevenue } from "@/app/lib/data";
 // This component is representational only.
 // For data visualization UI, check out:
