@@ -2,7 +2,7 @@
  * @Author: sutengfei
  * @Date: 2024-11-24 19:39:16
  * @LastEditors: sutengfei
- * @LastEditTime: 2024-11-28 18:40:32
+ * @LastEditTime: 2024-12-02 09:48:06
  */
 import Pagination from "@/app/ui/invoices/pagination";
 import Search from "@/app/ui/search";
@@ -12,6 +12,11 @@ import { lusitana } from "@/app/ui/fonts";
 import { InvoicesTableSkeleton } from "@/app/ui/skeletons";
 import { Suspense } from "react";
 import { fetchInvoicesPages } from "@/app/lib/data";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Invoices",
+};
 
 export default async function Page(props: {
   searchParams?: Promise<{

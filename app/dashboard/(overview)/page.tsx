@@ -2,7 +2,7 @@
  * @Author: sutengfei
  * @Date: 2024-11-24 19:33:52
  * @LastEditors: sutengfei
- * @LastEditTime: 2024-11-26 10:16:26
+ * @LastEditTime: 2024-12-02 09:49:30
  */
 import RevenueChart from "@/app/ui/dashboard/revenue-chart";
 import LatestInvoices from "@/app/ui/dashboard/latest-invoices";
@@ -15,6 +15,12 @@ import {
 } from "@/app/ui/skeletons";
 import {} from "@/app/ui/skeletons";
 import CardWrapper from "@/app/ui/dashboard/cards";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Home",
+};
+
 export default async function Page() {
   return (
     <main>
