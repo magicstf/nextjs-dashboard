@@ -2,7 +2,7 @@
  * @Author: sutengfei
  * @Date: 2024-11-28 19:57:07
  * @LastEditors: sutengfei
- * @LastEditTime: 2024-11-29 16:40:31
+ * @LastEditTime: 2024-12-06 09:14:15
  */
 "use server";
 import { z } from "zod";
@@ -63,9 +63,10 @@ export async function createInvoice(prevState: State, formData: FormData) {
       INSERT INTO invoices (customer_id, amount, status, date)
       VALUES (${customerId}, ${amountInCents}, ${status}, ${date})
     `;
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
   } catch (error) {
     return {
-      message: `Database Error: ${error}.`,
+      message: `Database Error: Failed to Update Invoice.`,
     };
   }
   // Revalidate the cache for the invoices page and redirect the user.
@@ -73,33 +74,36 @@ export async function createInvoice(prevState: State, formData: FormData) {
   redirect("/dashboard/invoices");
 }
 
-export async function updateInvoice(id: string, formData: FormData) {
-  // Validate form using Zod
+export async function updateInvoice(
+  id: string,
+  prevState: State,
+  formData: FormData
+) {
   const validatedFields = UpdateInvoice.safeParse({
     customerId: formData.get("customerId"),
     amount: formData.get("amount"),
     status: formData.get("status"),
   });
 
-  // If form validation fails, return errors early. Otherwise, continue.
   if (!validatedFields.success) {
     return {
       errors: validatedFields.error.flatten().fieldErrors,
-      message: "Missing Fields. Failed to Create Invoice.",
+      message: "Missing Fields. Failed to Update Invoice.",
     };
   }
-  // Prepare data for insertion into the database
+
   const { customerId, amount, status } = validatedFields.data;
   const amountInCents = amount * 100;
 
   try {
     await sql`
-        UPDATE invoices
-        SET customer_id = ${customerId}, amount = ${amountInCents}, status = ${status}
-        WHERE id = ${id}
-      `;
+      UPDATE invoices
+      SET customer_id = ${customerId}, amount = ${amountInCents}, status = ${status}
+      WHERE id = ${id}
+    `;
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
   } catch (error) {
-    return { message: `Database Error: ${error}.` };
+    return { message: "Database Error: Failed to Update Invoice." };
   }
 
   revalidatePath("/dashboard/invoices");
